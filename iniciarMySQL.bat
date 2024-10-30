@@ -1,0 +1,1 @@
+start cmd /k "C:\mysql\bin\mysqld.exe --console"
