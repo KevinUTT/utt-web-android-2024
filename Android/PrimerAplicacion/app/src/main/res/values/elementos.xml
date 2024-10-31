@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BotonNegro">
+        <item name="android:padding">10dp</item>
+        <item name="android:pointerIcon">hand</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">#191308</item>
+        <item name="android:textColor">#9CA3DB</item>
+    </style>
+</resources>
