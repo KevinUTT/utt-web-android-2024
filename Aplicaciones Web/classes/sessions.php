@@ -11,8 +11,13 @@
             $this->conn = new mysqli($servername, $username, $password, $database);
         }
 
-        public function addSession(string $token) {
-            $sql = "INSERT INTO Sessions VALUES('$token', TRUE)";
+        public function query($sql): mysqli_result {
+            $result = $this->conn->query($sql);
+            return $result;
+        }
+
+        public function addSession(string $token, string $studentID) {
+            $sql = "INSERT INTO Sessions VALUES('$token', '$studentID', TRUE)";
             $result = $this->conn->query($sql);
         }
 
@@ -24,7 +29,7 @@
         }
 
         public function logOutSession(string $token): string {
-            $sql = "DELETE FROM Sessions WHERE token = '$token'";
+            $sql = "UPDATE Sessions SET session = FALSE WHERE token = '$token'";
             $result = $this->conn->query($sql);
             $logOut = mysqli_num_rows($result) === 1;
             return $logOut ? "true" : "false";

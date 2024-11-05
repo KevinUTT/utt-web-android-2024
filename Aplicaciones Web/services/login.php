@@ -49,7 +49,8 @@
                 $tokenDate = date("Y-m-d H:i:s");
                 $token = base64_encode("$loginValue/$tokenDate");
                 setcookie("UTT_SSID", $token, time() + (86400 * 30), "/", "", false, true);
-                Database::getInstance()->addSession($token);
+                $row = $result->fetch_assoc();
+                Database::getInstance()->addSession($token, $row['studentID']);
                 echo $token;
             } else {
                 header("HTTP/1.1 403 Forbidden");
@@ -62,18 +63,20 @@
             break;
 
         case 'DELETE': 
-            //Verificar si el usuario existe, con su sesión o auth y deshabilitarlo...
+            $token = $_POST["token"];
+            Database::getInstance()->logOutSession($token);
+            setcookie("UTT_SSID", $token, time() - 3600, "/", "", false, true);
             break;
 
         case 'GET': 
             //Conectarse a la BDD
-            $studentID = $filter["studentID"];
+            /*$studentID = $filter["studentID"];
             $sql = "SELECT * FROM Students WHERE studentID = '$studentID'";
             var_dump($sql);
             $result = $conn->query($sql);
             var_dump($result);
             //Extraer el usuario de los queryParams
-            break;
+            break;*/
     };
 
     /*const admin = ["login" => "admin", "password" => "admin123"];
