@@ -49,7 +49,7 @@
             if(mysqli_num_rows($result) > 0) {
                 $row = $result->fetch_assoc();
                 $name = $row["name"];
-                $info = "<a class='nav-link' onclick='logout(\"$SSID\")'>Log Out</a>";
+                $info = "<a class='nav-link' onclick=\"logout('$SSID')\">Log Out</a>";
             }
         }
 

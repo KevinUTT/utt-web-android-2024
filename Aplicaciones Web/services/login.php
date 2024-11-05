@@ -63,9 +63,11 @@
             break;
 
         case 'DELETE': 
-            $token = $_POST["token"];
-            Database::getInstance()->logOutSession($token);
-            setcookie("UTT_SSID", $token, time() - 3600, "/", "", false, true);
+            $body = file_get_contents('php://input');
+            $json = json_decode($body, true);
+            $token = $json["token"];
+            $res = Database::getInstance()->logOutSession($token);
+            setcookie("UTT_SSID", $token, time() - 3600);
             break;
 
         case 'GET': 

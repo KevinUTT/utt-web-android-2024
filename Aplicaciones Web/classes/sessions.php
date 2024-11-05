@@ -31,8 +31,7 @@
         public function logOutSession(string $token): string {
             $sql = "UPDATE Sessions SET session = FALSE WHERE token = '$token'";
             $result = $this->conn->query($sql);
-            $logOut = mysqli_num_rows($result) === 1;
-            return $logOut ? "true" : "false";
+            return $result ? "true" : "false";
         }
 
         public function getAll() {
